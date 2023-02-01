@@ -1,9 +1,11 @@
-import App from './components/app';
 import './assets/scss/main.scss';
-import Layout from './components/layout';
+
+import App from './components/App/app';
+import Layout from './components/Layout/layout';
 
 const app = new App();
 const layout = new Layout();
+
 document.addEventListener('DOMContentLoaded', () => {
     layout.init();
     app.init();
