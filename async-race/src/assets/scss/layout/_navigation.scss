@@ -1,0 +1,39 @@
+/* _-_-_- layout/NAVIGATION -_-_-_ */
+.nav {
+    // .nav__list
+
+    &__list {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 5rem;
+    }
+
+    // .nav__item
+
+    &__item {
+    }
+
+    // .nav__btn
+
+    &__btn {
+        @extend %transition;
+        background: rgba(0, 0, 0, 0.4);
+        color: #ffffff;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        border: none;
+        text-transform: uppercase;
+        &:hover {
+            background: #e18d05;
+            color: #000000;
+        }
+        &.active {
+            background: #e18d05;
+            color: #000000;
+        }
+    }
+}
+.link {
+}

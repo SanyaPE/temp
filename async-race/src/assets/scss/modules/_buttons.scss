@@ -1,0 +1,20 @@
+/* _-_-_- modules/BUTTONS -_-_-_ */
+
+.btn {
+    @extend %transition;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: none;
+    background: #e18d05;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    &:hover {
+        color: #000000;
+    }
+    &:disabled{
+        background: #b9b8b6;
+        color: #000000;
+    }
+}

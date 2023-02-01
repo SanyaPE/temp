@@ -1,0 +1,49 @@
+/* _-_-_- layout/FOOTER -_-_-_ */
+.footer {
+    background-color: #000000;
+    width: 100%;
+    // .footer__content
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    // .footer__copy
+
+    &__copy {
+    }
+
+    // .footer__year
+
+    &__year {
+        margin-left: 0.5rem;
+    }
+
+    // .footer__github
+
+    &__github {
+        text-decoration: none;
+        color: inherit;
+        margin-right: auto;
+        margin-left: 1.3rem;
+    }
+
+    // .footer__rss
+
+    &__rss {
+        width: 12rem;
+        height: 5.5rem;
+        background-image: url('/src/assets/icons/rss.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    &__rss:hover {
+        filter: invert(71%) sepia(67%) saturate(4277%) hue-rotate(5deg) brightness(95%) contrast(96%);
+        @extend %transition;
+    }
+}
