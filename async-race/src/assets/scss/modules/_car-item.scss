@@ -1,0 +1,77 @@
+/* _-_-_- modules/CAR-ITEM -_-_-_ */
+
+.race {
+  padding-top: 0.1rem;
+}
+.car {
+  padding-top: 0.5rem;
+  border-bottom: dashed 1px #ffffff;
+  overflow: hidden;
+
+  // .car__ctrl
+
+  &__ctrl {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  // .car__select-btn
+
+  &__select-btn {
+  }
+
+  // .car__remove-btn
+
+  &__remove-btn {
+  }
+
+  // .car__race
+
+  &__race {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    position: relative;
+    height: 60px;
+    padding-top: 0.5rem;
+  }
+
+  // .car__start-btn and .car__stop-btn
+
+  &__start-btn, &__stop-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 2px;
+
+  }
+
+  // .car__img-wrapeer
+  
+  &__img-wrapper {
+    position: relative;
+    left: 0;
+    cursor: pointer;
+  
+  }
+  // .car__img
+
+  &__img {
+    @extend %transition;
+    // z-index: 0;
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
+
+  // .car__flag
+
+  &__flag {
+    position: relative;
+    margin-left: auto;
+    top: -20px;
+  }
+}

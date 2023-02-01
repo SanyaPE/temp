@@ -1,0 +1,19 @@
+/* _-_-_- layout/HEADER -_-_-_ */
+.header{
+    background-color: #000000;
+    &__container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 7.5rem
+    }
+    &__title{
+        @include font(3rem, 100%, 400);
+        @include respond-to("medium"){
+            font-size: 2rem;
+        }
+        @include respond-to("mobile"){
+            font-size: 1rem;
+        }
+    }
+}
