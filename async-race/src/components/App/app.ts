@@ -1,8 +1,8 @@
 import TogglePage from '../Toggle/toggle';
-import Client from '../../api/apiClient';
+// import apiClient from '../../api/apiClient';
 import Car from '../Car/car';
 import { ICar, IControlInput } from '../../models/models';
-import ControlInput from '../ControlInput/input';
+// import ControlInput from '../ControlInput/input';
 import { BUTTONS, PAGE_VALUE, CAR_GENERATE_COUNT, CAR_BRANDS } from '../../constants/const';
 import Pagination from '../Pagination/pagination';
 import Animation from '../Animation/animation';
@@ -24,20 +24,20 @@ class App {
     init() {
         const toglePage = new TogglePage();
         toglePage.init();
-        this.main = toglePage.elements.main;
-        this.main?.addEventListener('click', this.checkButton.bind(this));
-        this.client = new Client();
-        this.createPagination();
-        this.createCarsOnPage();
-        this.controlInput = new ControlInput() as IControlInput;
-        this.controlInput.watchInput();
+        // this.main = toglePage.elements.main;
+        // this.main?.addEventListener('click', this.checkButton.bind(this));
+        // this.apiClient = new apiClient();
+        // this.createPagination();
+        // this.createCarsOnPage();
+        // this.controlInput = new ControlInput() as IControlInput;
+        // this.controlInput.watchInput();
     }
 
     async createPagination() {
         const totalQty = document.querySelector('.total__qty') as HTMLElement;
         const pageCount = document.querySelector('.page__count') as HTMLElement;
         try {
-            const data = this.client.getCount();
+            const data = this.apiClient.getCount();
             const countCars = await data;
             const countPages = Math.ceil(Number(countCars) / PAGE_VALUE);
             totalQty.innerHTML = countCars;
@@ -62,7 +62,7 @@ class App {
         const countPages = this.countPageActive;
         const race = (this.main as HTMLElement).querySelector('.race');
         try {
-            const data = this.client.getCars(countPages);
+            const data = this.apiClient.getCars(countPages);
             (race as HTMLElement).innerHTML = '';
             const dataCars = await data;
             Object.values(dataCars).forEach((data) => {
@@ -142,19 +142,19 @@ class App {
         name = name ? name : this.randomName();
         color = color ? color : this.randomColor();
         const param = { name: name, color: color };
-        this.client.createCar(param);
+        this.apiClient.createCar(param);
     }
 
     async updateCar(name: string, color: string, id: string) {
-        this.client.updateCar(name, color, id);
+        this.apiClient.updateCar(name, color, id);
     }
 
     async deleteCar() {
-        this.client.deleteCar(this.targetId);
+        this.apiClient.deleteCar(this.targetId);
     }
 
     async startCar() {
-        const res = this.client.startEngine(this.targetId);
+        const res = this.apiClient.startEngine(this.targetId);
         const data = await res;
         const { velocity, distance } = data;
         const duration = distance / velocity;

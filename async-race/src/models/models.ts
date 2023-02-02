@@ -1,5 +1,5 @@
 interface IElements {
-    [index: string]: Node | HTMLElement | null;
+    [index: string]: HTMLElement | null;
 }
 
 interface IAnimate {

@@ -1,32 +1,54 @@
 import { IElements } from '../../models/models';
-import { GARAGE, WINNERS } from '../../templates/pagesElement';
+import { VIEW_GARAGE } from '../../constants/const';
 
 export default class TogglePage {
+    viewPage = VIEW_GARAGE;
     elements: IElements = {};
 
     init() {
-        const nav = document.querySelector('.nav');
-        this.elements.main = document.querySelector('.main');
-        nav?.addEventListener('click', (e: Event) => {
+        this.elements.nav = document.getElementById('nav');
+        const nav = this.elements.nav;
+        if (!nav) {
+            return;
+        }
+        nav.addEventListener('click', (e: Event) => {
             this.togglePage(e);
         });
-        const main = this.elements.main as HTMLElement;
-        main.insertAdjacentHTML('beforeend', GARAGE);
-        this.elements.garage = main.querySelector('.garage');
+
+        this.elements.main = document.getElementById('main');
     }
 
-    togglePage(e?: Event) {
-        const main = this.elements.main as HTMLElement;
-        const target = e ? (e.target as HTMLElement) : null;
-        const pageName: string = !target ? 'garage' : <string>target.dataset.btn;
-        if (!Object.prototype.hasOwnProperty.call(this.elements, pageName)) {
-            (main as HTMLElement).innerHTML = '';
-            main.insertAdjacentHTML('beforeend', WINNERS);
-            this.elements.winners = main.querySelector('.winners');
-        } else {
-            (main as HTMLElement).innerHTML = '';
-            const targetPage = this.elements[pageName] as Node;
-            main?.appendChild(targetPage);
+    togglePage(e: Event) {
+        const target = <HTMLElement>e.target;
+        const { nav, main } = this.elements;
+        if (!target || !nav || !main) {
+            return;
         }
+
+        Array.from(nav.children).forEach((navBtn) => {
+            if (navBtn === target) {
+                navBtn.classList.add('active');
+                navBtn.setAttribute('disabled', '');
+                return;
+            }
+
+            navBtn.classList.remove('active');
+            navBtn.removeAttribute('disabled');
+        });
+
+        Array.from(main.children).forEach((mainSection) => {
+            const viewPage = (mainSection as HTMLElement).dataset.view;
+            if (!viewPage) {
+                return;
+            }
+
+            if (target.dataset.btn == viewPage) {
+                mainSection.classList.remove('hidden');
+                this.viewPage = viewPage;
+                return;
+            }
+
+            mainSection.classList.add('hidden');
+        });
     }
 }

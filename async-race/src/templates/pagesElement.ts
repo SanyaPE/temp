@@ -1,13 +1,13 @@
-const WINNERS = `<section class="winners">
+const WINNERS = `<section class="winners hidden" data-view="winners">
 <div class="container">
-    <h2>winners</h2>
+    <h2>Winners ()</h2>
 </div>
 </section>`;
 
 const GARAGE = `
-    <section class="garage">
+    <section class="garage" data-view="garage">
         <div class="container">
-            <h2 class="garage__title">Garage</h2>
+            <h2 class="garage__title">Garage ()</h2>
             <div class="option">
                 <h3>Create car</h3>
                 <div class="option__create">

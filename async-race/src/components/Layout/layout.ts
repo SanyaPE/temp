@@ -1,29 +1,32 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { header } from '../../templates/header';
 import { mainElement } from '../../templates/mainElement';
 import { footer } from '../../templates/footer';
+import { GARAGE, WINNERS } from '../../templates/pagesElement';
 
 export default class Layout {
-    body: HTMLElement | null = null;
+    body: HTMLElement = document.body;
 
     init() {
-        this.body = document.querySelector('body') as HTMLElement;
         this.createHeader();
         this.createMainElement();
         this.createFooter();
     }
 
     createHeader() {
-        (this.body as HTMLElement).insertAdjacentHTML('beforeend', header);
+        this.body.insertAdjacentHTML('beforeend', header);
     }
 
     createMainElement() {
-        (this.body as HTMLElement).insertAdjacentHTML('beforeend', mainElement);
+        this.body.insertAdjacentHTML('beforeend', mainElement);
+
+        const main = this.body.lastElementChild;
+        if (main) {
+            main.insertAdjacentHTML('beforeend', GARAGE);
+            main.insertAdjacentHTML('beforeend', WINNERS);
+        }
     }
 
     createFooter() {
-        (this.body as HTMLElement).insertAdjacentHTML('beforeend', footer);
+        this.body.insertAdjacentHTML('beforeend', footer);
     }
 }
