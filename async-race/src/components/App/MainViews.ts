@@ -66,5 +66,6 @@ export default class MainViews {
 
             mainSection.classList.add('hidden');
         });
+        console.log(this.mainView);
     }
 }

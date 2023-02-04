@@ -1,9 +1,9 @@
-import { PAGE_VALUE, BASE_URL, PATH } from '../constants/const';
+import { CARS_ON_PAGE, BASE_URL, PATH } from '../constants/const';
 import { IParam, ICar } from '../models/models';
 
 export default class ApiClient {
     async getCars(page?: number) {
-        const url = `${BASE_URL}${PATH.garage}?_page=${page}&_limit=${PAGE_VALUE}`;
+        const url = `${BASE_URL}${PATH.garage}?_page=${page}&_limit=${CARS_ON_PAGE}`;
         try {
             const res = await fetch(url);
             const data = await res.json();
@@ -14,7 +14,7 @@ export default class ApiClient {
     }
 
     async getCount() {
-        const url = `${BASE_URL}${PATH.garage}?_page=1&_limit=${PAGE_VALUE}`;
+        const url = `${BASE_URL}${PATH.garage}?_page=1&_limit=${CARS_ON_PAGE}`;
         try {
             const res = await fetch(url);
             const countPages = res.headers.get('X-Total-Count');

@@ -21,6 +21,6 @@ export default class Car {
     }
 
     appendTo(parent: Node) {
-        parent.appendChild(this.elem as Node);
+        parent.appendChild(<Node>this.elem);
     }
 }

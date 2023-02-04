@@ -1,4 +1,5 @@
 export default class Pagination {
+    // paginationWrap: document.querySelector('.pagination__wrapper');
     pageCount: number | string;
     pagination: HTMLElement;
 

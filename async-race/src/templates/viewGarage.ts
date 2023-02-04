@@ -1,7 +1,7 @@
 export const GARAGE = `
     <section class="garage" data-view="garage">
         <div class="container">
-            <h2 class="garage__title">Garage</h2>
+            <h2 class="title garage__title">Garage</h2>
             <div class="option">
                 <h3>Create car</h3>
                 <div class="option__create">
@@ -23,13 +23,17 @@ export const GARAGE = `
             </div>
             <div class="total">
                 <span class="total__title">Total cars:</span>
-                <span class="total__qty">0</span>
+                <span class="total__qty" id="total-garage">0</span>
             </div>
             <div class="page">
                 <span class="page__title">Page:</span>
-                <span class="page__count">1</span>
+                <span class="page__count" id="page-garage">1</span>
             </div>
-            <div class="pagination__wrapper">
+            <div class="pagination" id="pagination-garage">
+                <button class="btn pagination__item">first page</button>
+                <button class="btn pagination__item">prev</button>
+                <button class="btn pagination__item">next</button>
+                <button class="btn pagination__item">last page</button>                
             </div>
             <div id="race"></div>
         </div>

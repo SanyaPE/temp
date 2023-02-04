@@ -26,7 +26,7 @@ interface IControlInput {
     color: string;
     name: string;
     id?: string | number;
-    watchInput(): void;
+    controls: { [index: string]: HTMLInputElement };
 }
 
 interface IParam {
@@ -35,4 +35,9 @@ interface IParam {
     id?: string;
 }
 
-export { IElements, ICar, IControlInput, IParam, IAppState };
+interface IMainView {
+    mainView: string;
+    elements: IElements;
+}
+
+export { IElements, ICar, IControlInput, IParam, IAppState, IMainView };

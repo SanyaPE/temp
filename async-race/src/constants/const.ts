@@ -1,5 +1,5 @@
-const PAGE_VALUE = 7;
-const PAGE_WINNERS = 10;
+const CARS_ON_PAGE = 7;
+const WINNERS_ON_PAGE = 10;
 
 const VIEWS = {
     garage: 'garage',
@@ -31,4 +31,4 @@ const CAR_GENERATE_COUNT = 100;
 
 const BUTTONS = ['create', 'update', 'race', 'reset', 'generate', 'select', 'remove', 'start', 'stop', 'img', 'page'];
 
-export { PAGE_VALUE, PAGE_WINNERS, BASE_URL, PATH, CAR_GENERATE_COUNT, BUTTONS, VIEWS, ACTION };
+export { CARS_ON_PAGE, WINNERS_ON_PAGE, BASE_URL, PATH, CAR_GENERATE_COUNT, BUTTONS, VIEWS, ACTION };
