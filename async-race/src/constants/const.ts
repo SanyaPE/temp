@@ -13,8 +13,8 @@ const PATH = {
     winners: '/winners',
 };
 
-const ACTION = {
-    action: 'action',
+const GARAGE_ACTION = {
+    action: 'garage-action',
     create: 'create',
     update: 'update',
     race: 'race',
@@ -27,8 +27,27 @@ const ACTION = {
     page: 'page',
 };
 
+const PAGE_ACTION = {
+    winnersPaginate: 'winners-paginate',
+    garagePaginate: 'garage-paginate',
+    first: 'first',
+    prev: 'prev',
+    next: 'next',
+    last: 'last',
+};
+
 const CAR_GENERATE_COUNT = 100;
 
 const BUTTONS = ['create', 'update', 'race', 'reset', 'generate', 'select', 'remove', 'start', 'stop', 'img', 'page'];
 
-export { CARS_ON_PAGE, WINNERS_ON_PAGE, BASE_URL, PATH, CAR_GENERATE_COUNT, BUTTONS, VIEWS, ACTION };
+export {
+    CARS_ON_PAGE,
+    WINNERS_ON_PAGE,
+    BASE_URL,
+    PATH,
+    CAR_GENERATE_COUNT,
+    BUTTONS,
+    VIEWS,
+    GARAGE_ACTION,
+    PAGE_ACTION,
+};

@@ -23,18 +23,18 @@ export const GARAGE = `
             </div>
             <div class="total">
                 <span class="total__title">Total cars:</span>
-                <span class="total__qty" id="total-garage">0</span>
+                <span class="total__qty" id="total-garage"></span>
             </div>
             <div class="page">
                 <span class="page__title">Page:</span>
                 <span class="page__count" id="page-garage">1</span>
             </div>
             <div class="pagination" id="pagination-garage">
-                <button class="btn pagination__item">first page</button>
-                <button class="btn pagination__item">prev</button>
-                <button class="btn pagination__item">next</button>
-                <button class="btn pagination__item">last page</button>                
+                <button class="btn pagination__item" data-btn="first">first page</button>
+                <button class="btn pagination__item" data-btn="prev">prev</button>
+                <button class="btn pagination__item" data-btn="next">next</button>
+                <button class="btn pagination__item" data-btn="last">last page</button>                
             </div>
-            <div id="race"></div>
+            <div class="race" id="race"></div>
         </div>
     </section>`;

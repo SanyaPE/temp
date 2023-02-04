@@ -1,7 +1,7 @@
 import ViewPages from './App/MainViews';
 import { IAppState } from '../models/models';
 import ControlInput from './App/ControlInput';
-import { ACTION } from '../constants/const';
+import { GARAGE_ACTION, PAGE_ACTION } from '../constants/const';
 import { Garage } from './App/Garage';
 
 class App {
@@ -19,18 +19,21 @@ class App {
     };
     viewPages = new ViewPages();
     controlInput = new ControlInput();
-    garageView = new Garage(this.appState, this.viewPages, this.controlInput);
 
     init() {
         this.viewPages.init();
-        const { main } = this.viewPages.elements;
-        main?.addEventListener(ACTION.action, (e) => this.actionOnCars(<CustomEvent>e));
-        this.controlInput.watchInput();
+        const garageView = new Garage(this.appState, this.viewPages, this.controlInput);
+        garageView.renderCarsOnPage();
 
-        this.garageView.renderCarsOnPage();
+        document.body.addEventListener(GARAGE_ACTION.action, (e) => this.actionOnCars(<CustomEvent>e, garageView));
+        document.body.addEventListener(PAGE_ACTION.garagePaginate, (e) =>
+            this.actionOnGaragePages(<CustomEvent>e, garageView)
+        );
+
+        this.controlInput.watchInput();
     }
 
-    async actionOnCars(e: CustomEvent) {
+    async actionOnCars(e: CustomEvent, garageView: Garage) {
         const carId = Number(e?.detail?.carId);
         const action = e?.detail?.action;
         if (carId) {
@@ -41,35 +44,41 @@ class App {
         }
 
         switch (action) {
-            case ACTION.start:
-                this.garageView.startCar(carId);
+            case GARAGE_ACTION.start:
+                garageView.startCar(carId);
                 break;
-            case ACTION.stop:
-                this.garageView.stopCar(carId);
+            case GARAGE_ACTION.stop:
+                garageView.stopCar(carId);
                 break;
-            case ACTION.race:
-                this.garageView.raceCars();
+            case GARAGE_ACTION.race:
+                garageView.raceCars();
                 break;
-            case ACTION.reset:
-                this.garageView.resetCars();
+            case GARAGE_ACTION.reset:
+                garageView.resetCars();
                 break;
-            case ACTION.generate:
-                this.garageView.generateCars();
+            case GARAGE_ACTION.generate:
+                garageView.generateCars();
                 break;
-            case ACTION.create:
-                await this.garageView.createCar(ACTION.create);
-                this.garageView.renderCarsOnPage();
+            case GARAGE_ACTION.create:
+                await garageView.createCar(GARAGE_ACTION.create);
+                garageView.renderCarsOnPage();
                 break;
-            case ACTION.select:
-                this.garageView.selectCar(carId);
+            case GARAGE_ACTION.select:
+                garageView.selectCar(carId);
                 break;
-            case ACTION.update:
-                this.garageView.updateCar();
+            case GARAGE_ACTION.update:
+                garageView.updateCar();
                 break;
-            case ACTION.remove:
-                this.garageView.deleteCar(carId);
+            case GARAGE_ACTION.remove:
+                garageView.deleteCar(carId);
                 break;
         }
+    }
+
+    async actionOnGaragePages(e: CustomEvent, garageView: Garage) {
+        const nextPage = Number(e?.detail?.nextPage);
+        this.appState.currentGaragePage = nextPage;
+        garageView.renderCarsOnPage();
     }
 }
 

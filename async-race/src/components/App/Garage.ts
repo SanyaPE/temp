@@ -1,10 +1,11 @@
 import ApiClient from '../../api/apiClient';
 import { CAR_BRANDS } from '../../constants/carBrands';
 import { CAR_MODELS } from '../../constants/carModels';
-import { ACTION, CAR_GENERATE_COUNT } from '../../constants/const';
+import { GARAGE_ACTION, CAR_GENERATE_COUNT } from '../../constants/const';
 import { IAppState, ICar, IControlInput, IMainView } from '../../models/models';
 import { randomColor } from '../../utils/randColor';
 import { randomName } from '../../utils/randName';
+import Pagination from '../Common/Pagination';
 import Car from './Car';
 
 export class Garage {
@@ -12,11 +13,13 @@ export class Garage {
     viewPages;
     controlInput;
     appState;
+    pagination;
 
     constructor(appState: IAppState, viewPages: IMainView, controlInput: IControlInput) {
         this.viewPages = viewPages;
         this.controlInput = controlInput;
         this.appState = appState;
+        this.pagination = new Pagination('garage');
     }
 
     async renderCarsOnPage() {
@@ -26,16 +29,16 @@ export class Garage {
         this.viewPages.elements.race = raceElement;
 
         try {
-            raceElement.replaceChildren();
-
             this.appState.carsToRace = <Array<ICar>>await this.apiClient.getCars(currentGaragePage);
+            raceElement.replaceChildren();
 
             Object.values(this.appState.carsToRace).forEach((carData) => {
                 new Car(<ICar>carData).appendTo(raceElement);
             });
 
             this.appState.totalCars = Number(await this.apiClient.getCount()) || 0;
-            // rerender GARAGE pagination
+            const { totalCars } = this.appState;
+            this.pagination.paginate(totalCars, currentGaragePage);
         } catch (err) {
             raceElement.textContent = 'NO CONNECTION TO API';
         }
@@ -81,15 +84,18 @@ export class Garage {
         await this.apiClient.stopEngine(carId);
         const car = this.appState.carsToRace.find((car: ICar) => car.id === carId);
         car?.animation?.cancel();
-        this.enableBtn(String(carId), ACTION.start);
-        this.disableBtn(String(carId), ACTION.stop);
+        this.enableBtn(String(carId), GARAGE_ACTION.start);
+        this.disableBtn(String(carId), GARAGE_ACTION.stop);
     }
 
     async raceCars() {
         const { popUp } = this.viewPages.elements;
+        const btnReset = document.querySelector('.btn-reset');
+        btnReset?.setAttribute('disabled', '');
+
         Promise.race(
             this.appState.carsToRace.map(async (car: ICar) => {
-                this.disableBtn(String(car.id), ACTION.start);
+                this.disableBtn(String(car.id), GARAGE_ACTION.start);
                 await this.startCar(car.id);
                 return car.animation?.finished;
             })
@@ -103,6 +109,7 @@ export class Garage {
             const winnerTime = (animationFinished?.currentTime || 0) / 1000;
             popUp.textContent = `Winner is ${car.name} with time ${winnerTime.toFixed(2)}s!`;
             // rerender WINNERS page + pagination
+            btnReset?.removeAttribute('disabled');
             setTimeout(() => popUp.classList.remove('show'), 2000);
         });
     }
@@ -110,7 +117,7 @@ export class Garage {
     async resetCars() {
         Promise.all(
             this.appState.carsToRace.map(async (car: ICar) => {
-                this.enableBtn(String(car.id), ACTION.start);
+                this.enableBtn(String(car.id), GARAGE_ACTION.start);
                 await this.stopCar(car.id);
             })
         ).then(() => document.querySelector('.btn-race')?.removeAttribute('disabled'));
@@ -123,7 +130,7 @@ export class Garage {
             popUp.textContent = 'Generating Cars... Please Wait...';
         }
 
-        Promise.all(Array.from({ length: CAR_GENERATE_COUNT }, () => this.createCar(ACTION.generate))).then(
+        Promise.all(Array.from({ length: CAR_GENERATE_COUNT }, () => this.createCar(GARAGE_ACTION.generate))).then(
             async () => {
                 await this.renderCarsOnPage();
                 popUp?.classList.remove('show');
@@ -132,10 +139,10 @@ export class Garage {
     }
 
     async createCar(action: string) {
-        if (action === ACTION.create) {
+        if (action === GARAGE_ACTION.create) {
             const { color, name } = this.controlInput;
             await this.apiClient.createCar({ name, color });
-        } else if (action === ACTION.generate) {
+        } else if (action === GARAGE_ACTION.generate) {
             await this.apiClient.createCar({ name: randomName(CAR_BRANDS, CAR_MODELS), color: randomColor() });
         }
     }

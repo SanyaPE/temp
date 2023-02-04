@@ -1,6 +1,6 @@
 import { IElements } from '../../models/models';
-import { VIEWS } from '../../constants/const';
-import { checkBtnForAction } from '../Common/checkBtn';
+import { GARAGE_ACTION, VIEWS } from '../../constants/const';
+import { checkBtnForAction } from '../Common/checkBtnForAction';
 
 export default class MainViews {
     mainView = VIEWS.garage;
@@ -14,21 +14,19 @@ export default class MainViews {
         });
 
         this.elements.main = document.getElementById('main');
-        const { main } = this.elements;
-        main?.addEventListener('click', (e: Event) => this.dispatchActionEvent(e));
+        document.body.addEventListener('click', (e: Event) => this.dispatchActionEvent(e));
 
         this.elements.popUp = document.getElementById('popup');
     }
 
     dispatchActionEvent(e: Event) {
-        const { main } = this.elements;
         const detail = checkBtnForAction(e);
         if (!detail?.action) {
             return;
         }
 
-        main?.dispatchEvent(
-            new CustomEvent('action', {
+        document.body.dispatchEvent(
+            new CustomEvent(GARAGE_ACTION.action, {
                 detail,
             })
         );

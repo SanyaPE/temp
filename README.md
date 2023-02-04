@@ -2,14 +2,14 @@
 
 #### Basic structure:
 *   **[+]** (+5) There should be two views on the site: "Garage" and "Winners".
-*   **[-]** (+5) "Garage" view should contain its name, page number, and the full amount of items in the database (how many car user has in his garage).
+*   **[+]** (+5) "Garage" view should contain its name, page number, and the full amount of items in the database (how many car user has in his garage).
 *   **[-]** (+5) "Winners" view should contain its name, page number, and the full amount of items in the database (how many records the winners table contains).
 *   **[+]** (+10) View state should be saved when user switches from one view to another. For example, page number shouldn't be reset, input controls should contain that they contained before switching, etc.
 "Garage" view:
 *   **[-]** (+15) User should be able to create, update, delete a car, and see the list of the cars. Car has only two attributes: "name" and "color". For "delete"-operation car should be deleted from "garage" table as well as from "winners".
 *   **[+]** (+10) User should be able to select any color from an RGB-Palete like here and see the picture of the car colored with the color selected and car's name.
 *   **[+]** (+5) Near the car's picture should be buttons to update its attributes or delete it.
-*   **[-]** (+10) There should be pagination on the "Garage" view (7 cars per one page).
+*   **[+]** (+10) There should be pagination on the "Garage" view (7 cars per one page).
 *   **[+]** (+10) There should be a button to create random cars (100 cars per click). Name should be assembled from two random parts, for example "Tesla" + "Model S", or "Ford" + "Mustang" (At least 10 different names for each part). Color should be also generated randomly.
 #### Car animation:
 *   **[+]** (+5) Near the car's picture should be buttons for starting / stoping the car engine.
