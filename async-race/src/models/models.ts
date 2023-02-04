@@ -2,12 +2,24 @@ interface IElements {
     [index: string]: HTMLElement | null;
 }
 
-interface IAnimate {
-    [index: string]: any;
+interface ICar {
+    id: number;
+    name: string;
+    color: string;
+    animation?: Animation;
 }
 
-interface ICar {
-    [index: string]: string;
+interface IAppState {
+    currentGaragePage: number;
+    currentWinnersPage: number;
+    selectedCar: {
+        id: number;
+        name: string;
+        color: string;
+    };
+    carsToRace: Array<ICar>;
+    totalCars: number;
+    totalWinners: number;
 }
 
 interface IControlInput {
@@ -23,4 +35,4 @@ interface IParam {
     id?: string;
 }
 
-export { IElements, ICar, IControlInput, IParam, IAnimate };
+export { IElements, ICar, IControlInput, IParam, IAppState };

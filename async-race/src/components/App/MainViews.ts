@@ -1,21 +1,37 @@
 import { IElements } from '../../models/models';
-import { VIEW_GARAGE } from '../../constants/const';
+import { VIEWS } from '../../constants/const';
+import { checkBtnForAction } from '../Common/checkBtn';
 
-export default class TogglePage {
-    viewPage = VIEW_GARAGE;
+export default class MainViews {
+    mainView = VIEWS.garage;
     elements: IElements = {};
 
     init() {
         this.elements.nav = document.getElementById('nav');
         const nav = this.elements.nav;
-        if (!nav) {
-            return;
-        }
-        nav.addEventListener('click', (e: Event) => {
+        nav?.addEventListener('click', (e: Event) => {
             this.togglePage(e);
         });
 
         this.elements.main = document.getElementById('main');
+        const { main } = this.elements;
+        main?.addEventListener('click', (e: Event) => this.dispatchActionEvent(e));
+
+        this.elements.popUp = document.getElementById('popup');
+    }
+
+    dispatchActionEvent(e: Event) {
+        const { main } = this.elements;
+        const detail = checkBtnForAction(e);
+        if (!detail?.action) {
+            return;
+        }
+
+        main?.dispatchEvent(
+            new CustomEvent('action', {
+                detail,
+            })
+        );
     }
 
     togglePage(e: Event) {
@@ -37,14 +53,14 @@ export default class TogglePage {
         });
 
         Array.from(main.children).forEach((mainSection) => {
-            const viewPage = (mainSection as HTMLElement).dataset.view;
-            if (!viewPage) {
+            const mainView = (mainSection as HTMLElement).dataset.view;
+            if (!mainView) {
                 return;
             }
 
-            if (target.dataset.btn == viewPage) {
+            if (target.dataset.btn == mainView) {
                 mainSection.classList.remove('hidden');
-                this.viewPage = viewPage;
+                this.mainView = mainView;
                 return;
             }
 

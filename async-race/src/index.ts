@@ -1,7 +1,7 @@
 import './assets/scss/main.scss';
 
-import App from './components/App/app';
-import Layout from './components/Layout/layout';
+import App from './components/App';
+import Layout from './components/Layout';
 
 const app = new App();
 const layout = new Layout();

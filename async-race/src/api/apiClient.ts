@@ -1,7 +1,7 @@
 import { PAGE_VALUE, BASE_URL, PATH } from '../constants/const';
-import { IParam } from '../models/models';
+import { IParam, ICar } from '../models/models';
 
-export default class Client {
+export default class ApiClient {
     async getCars(page?: number) {
         const url = `${BASE_URL}${PATH.garage}?_page=${page}&_limit=${PAGE_VALUE}`;
         try {
@@ -42,7 +42,7 @@ export default class Client {
         }
     }
 
-    async deleteCar(id: string) {
+    async deleteCar(id: number) {
         const url = `${BASE_URL}${PATH.garage}/${id}`;
         const param = {
             method: 'DELETE',
@@ -56,14 +56,14 @@ export default class Client {
         }
     }
 
-    async updateCar(name: string, color: string, id: string) {
+    async updateCar({ id, name, color }: ICar) {
         const url = `${BASE_URL}${PATH.garage}/${id}`;
         const param = {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name: name, color: color }),
+            body: JSON.stringify({ name, color }),
         };
         try {
             const res = await fetch(url, param);
@@ -74,7 +74,7 @@ export default class Client {
         }
     }
 
-    async startEngine(id: string) {
+    async startEngine(id: number) {
         const url = `${BASE_URL}${PATH.engine}?id=${id}&status=started`;
         const param = {
             method: 'PATCH',
@@ -88,7 +88,7 @@ export default class Client {
         }
     }
 
-    static async stopEngine(id: string) {
+    async stopEngine(id: number) {
         const url = `${BASE_URL}${PATH.engine}?id=${id}&status=stopped`;
         const param = {
             method: 'PATCH',
@@ -100,5 +100,15 @@ export default class Client {
         } catch (err) {
             console.log('Car with such id was not found in the garage.', err);
         }
+    }
+
+    async driveEngine(id: number) {
+        const url = `${BASE_URL}${PATH.engine}?id=${id}&status=drive`;
+        const param = {
+            method: 'PATCH',
+        };
+        const res = await fetch(url, param);
+        const data = await res.json();
+        return data;
     }
 }

@@ -1,7 +1,8 @@
-import { header } from '../../templates/header';
-import { mainElement } from '../../templates/mainElement';
-import { footer } from '../../templates/footer';
-import { GARAGE, WINNERS } from '../../templates/pagesElement';
+import { header } from '../templates/header';
+import { mainElement } from '../templates/mainElement';
+import { footer } from '../templates/footer';
+import { GARAGE } from '../templates/viewGarage';
+import { WINNERS } from '../templates/viewWinners';
 
 export default class Layout {
     body: HTMLElement = document.body;

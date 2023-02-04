@@ -6,7 +6,7 @@ export const CAR_ELEM = `<div class="car">
 </div>
 <div class="car__race">
     <button class="car__start-btn btn" data-btn="start">A</button>
-    <button class="car__stop-btn btn" data-btn="stop">B</button>
+    <button class="car__stop-btn btn" data-btn="stop" disabled>B</button>
     <div class="car__img-wrapper" data-btn="img">
     <svg
         class="car__img"

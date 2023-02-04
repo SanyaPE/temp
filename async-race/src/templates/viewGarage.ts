@@ -1,13 +1,7 @@
-const WINNERS = `<section class="winners hidden" data-view="winners">
-<div class="container">
-    <h2>Winners ()</h2>
-</div>
-</section>`;
-
-const GARAGE = `
+export const GARAGE = `
     <section class="garage" data-view="garage">
         <div class="container">
-            <h2 class="garage__title">Garage ()</h2>
+            <h2 class="garage__title">Garage</h2>
             <div class="option">
                 <h3>Create car</h3>
                 <div class="option__create">
@@ -17,8 +11,8 @@ const GARAGE = `
                 </div>
                 <h3>Update car</h3>
                 <div class="option__update">
-                    <input type="text" placeholder="Enter new name" class="update-text" />
-                    <input type="color" class="update-color" />
+                    <input type="text" placeholder="Enter new name" class="update-text"/>
+                    <input type="color" class="update-color"/>
                     <button class="btn-update btn" data-btn="update" disabled>Update</button>
                 </div>
             </div>
@@ -33,11 +27,10 @@ const GARAGE = `
             </div>
             <div class="page">
                 <span class="page__title">Page:</span>
-                <span class="page__count">0</span>
+                <span class="page__count">1</span>
             </div>
             <div class="pagination__wrapper">
             </div>
-            <div class="race"></div>
+            <div id="race"></div>
         </div>
     </section>`;
-export { WINNERS, GARAGE };

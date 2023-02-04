@@ -1,15 +1,19 @@
-/* eslint-disable no-unused-vars */
 export default class ControlInput {
-    color: string | null = null;
-    name: string | null = null;
+    controls: { [index: string]: HTMLInputElement } = {};
+    color = '#000000';
+    name = '';
 
     watchInput() {
-        const createColor = document.querySelector('.create__color') as HTMLInputElement;
-        const createName = document.querySelector('.create__name') as HTMLInputElement;
-        const createBtn = document.querySelector('.btn-create') as HTMLInputElement;
-        const updateColor = document.querySelector('.update-color') as HTMLInputElement;
-        const updateName = document.querySelector('.update-text') as HTMLInputElement;
-        const updateBtn = document.querySelector('.btn-update') as HTMLInputElement;
+        this.controls = {
+            createColor: <HTMLInputElement>document.querySelector('.create__color'),
+            createName: <HTMLInputElement>document.querySelector('.create__name'),
+            createBtn: <HTMLInputElement>document.querySelector('.btn-create'),
+            updateColor: <HTMLInputElement>document.querySelector('.update-color'),
+            updateName: <HTMLInputElement>document.querySelector('.update-text'),
+            updateBtn: <HTMLInputElement>document.querySelector('.btn-update'),
+        };
+        const { createColor, createName, createBtn, updateColor, updateName, updateBtn } = this.controls;
+
         createColor.addEventListener('input', () => {
             createBtn.disabled = false;
         });
