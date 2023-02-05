@@ -1,7 +1,7 @@
 import ViewPages from './App/MainViews';
 import { IAppState } from '../models/models';
 import ControlInput from './App/ControlInput';
-import { GARAGE_ACTION, PAGE_ACTION, WINNERS_ACTION } from '../constants/const';
+import { CUSTOM_EVENTS, GARAGE_ACTION, SORT_BY, SORT_DIR, WINNERS_ACTION } from '../constants/const';
 import { Garage } from './App/GarageView';
 import { Winners } from './App/WinnersView';
 
@@ -18,6 +18,10 @@ class App {
         totalWinners: 0,
         carsToRace: [],
         winners: [],
+        sortWinners: {
+            sortDir: SORT_DIR.asc,
+            sortBy: SORT_BY.id,
+        },
     };
     viewPages = new ViewPages();
     controlInput = new ControlInput();
@@ -27,16 +31,16 @@ class App {
         const garageView = new Garage(this.appState, this.viewPages, this.controlInput);
         garageView.renderCarsOnPage();
 
-        document.body.addEventListener(GARAGE_ACTION.action, (e) => this.actionOnCars(<CustomEvent>e, garageView));
-        document.body.addEventListener(PAGE_ACTION.garagePaginate, (e) =>
+        document.body.addEventListener(CUSTOM_EVENTS.garage, (e) => this.actionOnCars(<CustomEvent>e, garageView));
+        document.body.addEventListener(CUSTOM_EVENTS.garagePaginate, (e) =>
             this.actionOnGaragePages(<CustomEvent>e, garageView)
         );
 
         const winnersView = new Winners(this.appState);
         winnersView.renderWinnersOnPage();
 
-        document.body.addEventListener(WINNERS_ACTION.action, (e) => this.actionOnWinners(<CustomEvent>e, winnersView));
-        document.body.addEventListener(PAGE_ACTION.winnersPaginate, (e) =>
+        document.body.addEventListener(CUSTOM_EVENTS.winners, (e) => this.actionOnWinners(<CustomEvent>e, winnersView));
+        document.body.addEventListener(CUSTOM_EVENTS.winnersPaginate, (e) =>
             this.actionOnWinnersPages(<CustomEvent>e, winnersView)
         );
 
@@ -86,7 +90,20 @@ class App {
     }
 
     async actionOnWinners(e: CustomEvent, winnersView: Winners) {
-        winnersView.renderWinnersOnPage();
+        const action = e?.detail?.action;
+        const { sortBy, sortDir } = e?.detail;
+        if (!action) {
+            return;
+        }
+
+        switch (action) {
+            case WINNERS_ACTION.render:
+                winnersView.renderWinnersOnPage();
+                break;
+            case WINNERS_ACTION.sort:
+                winnersView.renderWinnersOnPage(sortBy, sortDir);
+                break;
+        }
     }
 
     async actionOnGaragePages(e: CustomEvent, garageView: Garage) {

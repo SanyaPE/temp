@@ -17,12 +17,12 @@ export const WINNERS = `
                 <button class="btn pagination__item" data-btn="last">last page</button>           
             </div>
             <table>
-                <thead>
+                <thead id="sort">
                     <th>#</th>
                     <th>Color</th>
                     <th>Name</th>
-                    <th>Wins</th>
-                    <th>Best Time(sec)</th>
+                    <th class="btn pointer active" id="sort-wins" data-sort="wins">Wins</th>
+                    <th class="btn pointer active" id="sort-time" data-sort="time">Best Time(sec)</th>
                 </thead>
                 <tbody id="winners"></tbody>
             </table>

@@ -16,7 +16,7 @@
 }
 
 table {
-    margin: 0.7em auto;
+    margin: 2em auto;
 }
 
 thead th {
@@ -32,6 +32,13 @@ tr {
 
 th, td {
     text-align: center;
-    padding: 0.5em;
+    padding: 0 0.3em;
+}
+
+.pointer.active.DESC::after {
+    content: "▲";
 }
   
+.pointer.active.ASC::after {
+    content: "▼";
+}

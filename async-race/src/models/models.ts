@@ -41,6 +41,10 @@ interface IAppState {
     totalCars: number;
     totalWinners: number;
     winners: Array<IWinner>;
+    sortWinners: {
+        sortDir: string;
+        sortBy: string;
+    };
 }
 
 interface IControlInput {

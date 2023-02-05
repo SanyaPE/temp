@@ -13,8 +13,14 @@ const PATH = {
     winners: '/winners',
 };
 
+const CUSTOM_EVENTS = {
+    garage: 'garage-action',
+    winners: 'winners-action',
+    garagePaginate: 'garage-paginate',
+    winnersPaginate: 'winners-paginate',
+};
+
 const GARAGE_ACTION = {
-    action: 'garage-action',
     create: 'create',
     update: 'update',
     race: 'race',
@@ -28,12 +34,11 @@ const GARAGE_ACTION = {
 };
 
 const WINNERS_ACTION = {
-    action: 'winners-action',
+    render: 'render',
+    sort: 'sort',
 };
 
 const PAGE_ACTION = {
-    winnersPaginate: 'winners-paginate',
-    garagePaginate: 'garage-paginate',
     first: 'first',
     prev: 'prev',
     next: 'next',
@@ -63,6 +68,7 @@ export {
     CAR_GENERATE_COUNT,
     BUTTONS,
     VIEWS,
+    CUSTOM_EVENTS,
     GARAGE_ACTION,
     PAGE_ACTION,
     WINNERS_ACTION,

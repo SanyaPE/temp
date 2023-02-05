@@ -111,7 +111,7 @@ export class Garage {
                 return;
             }
             popUp.classList.add('show');
-            const winnerTime = Number(((animationFinished?.currentTime || 0) / 1000).toFixed(1));
+            const winnerTime = Number(((animationFinished?.currentTime || 0) / 1000).toFixed(2)) || Infinity;
             popUp.textContent = `Winner is ${car.name} with time ${winnerTime}s!`;
             btnReset?.removeAttribute('disabled');
             setTimeout(() => popUp.classList.remove('show'), 2000);

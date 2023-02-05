@@ -1,4 +1,4 @@
-import { VIEWS } from '../../constants/const';
+import { SORT_BY, SORT_DIR, VIEWS } from '../../constants/const';
 import { IAppState, IWinner } from '../../models/models';
 import Pagination from '../Common/Pagination';
 import ApiWinners from '../../api/apiWinners';
@@ -15,7 +15,7 @@ export class Winners {
         this.appState = appState;
     }
 
-    async renderWinnersOnPage() {
+    async renderWinnersOnPage(sortBy = SORT_BY.id, sortDir = SORT_DIR.asc) {
         const { currentWinnersPage } = this.appState;
         const winnersTable = document.getElementById('winners');
         if (!winnersTable) {
@@ -23,7 +23,9 @@ export class Winners {
         }
 
         try {
-            this.appState.winners = <Array<IWinner>>await this.apiWinners.getWinners(currentWinnersPage);
+            this.appState.winners = <Array<IWinner>>(
+                await this.apiWinners.getWinners(currentWinnersPage, sortBy, sortDir)
+            );
 
             const cars = await Promise.all(this.appState.winners.map((winner) => this.apiGarage.getCar(winner.id)));
             this.appState.winners.forEach((winner, idx) => {
