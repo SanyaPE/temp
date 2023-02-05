@@ -100,18 +100,40 @@ export class Garage {
                 await this.startCar(car.id);
                 return car.animation?.finished;
             })
-        ).then((animationFinished) => {
-            const carId = animationFinished?.id;
-            const car = this.appState.carsToRace.find((car: ICar) => car.id === Number(carId));
+        ).then(async (animationFinished) => {
+            const carId = Number(animationFinished?.id);
+            if (!carId) {
+                return;
+            }
+
+            const car = this.appState.carsToRace.find((car: ICar) => car.id === carId);
             if (!popUp || !car) {
                 return;
             }
             popUp.classList.add('show');
-            const winnerTime = (animationFinished?.currentTime || 0) / 1000;
-            popUp.textContent = `Winner is ${car.name} with time ${winnerTime.toFixed(2)}s!`;
-            // TODO: ADD WINNER TO WINNERS TABLE
+            const winnerTime = Number(((animationFinished?.currentTime || 0) / 1000).toFixed(1));
+            popUp.textContent = `Winner is ${car.name} with time ${winnerTime}s!`;
             btnReset?.removeAttribute('disabled');
             setTimeout(() => popUp.classList.remove('show'), 2000);
+
+            try {
+                const winner = await this.apiWinners.getWinner(carId);
+                if (Object.keys(winner).length === 0) {
+                    throw new Error('THERE IS NOT SUCH WINNER IN DB. PLEASE CREATE IT...');
+                }
+                this.apiWinners.updateWinner({
+                    id: carId,
+                    wins: winner.wins + 1,
+                    time: winner.time > winnerTime ? winnerTime : winner.timer,
+                });
+            } catch (err) {
+                console.log('create winner');
+                this.apiWinners.createWinner({
+                    id: carId,
+                    wins: 1,
+                    time: winnerTime,
+                });
+            }
         });
     }
 
@@ -170,8 +192,8 @@ export class Garage {
 
     async deleteCar(id: number) {
         await this.apiGarage.deleteCar(id);
+        this.apiWinners.deleteWinner(id);
         this.renderCarsOnPage();
-        // TODO: deleted from WINNERS table as well
     }
 
     enableBtn(id: string, action: string) {
