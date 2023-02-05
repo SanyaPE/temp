@@ -16,6 +16,8 @@ export function checkBtnForPagination(e: Event, view: string, currentPage: numbe
         nextPage = currentPage + 1;
     } else if (action === PAGE_ACTION.last) {
         nextPage = totalPages;
+    } else {
+        nextPage = currentPage;
     }
 
     if (nextPage !== currentPage && nextPage >= 1 && nextPage <= totalPages) {

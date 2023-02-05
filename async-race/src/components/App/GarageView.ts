@@ -127,7 +127,6 @@ export class Garage {
                     time: winner.time > winnerTime ? winnerTime : winner.timer,
                 });
             } catch (err) {
-                console.log('create winner');
                 this.apiWinners.createWinner({
                     id: carId,
                     wins: 1,

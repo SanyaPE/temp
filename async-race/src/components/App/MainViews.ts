@@ -1,5 +1,5 @@
 import { IElements } from '../../models/models';
-import { GARAGE_ACTION, VIEWS } from '../../constants/const';
+import { GARAGE_ACTION, VIEWS, WINNERS_ACTION } from '../../constants/const';
 import { checkBtnForAction } from '../Common/checkBtnForAction';
 
 export default class MainViews {
@@ -54,6 +54,10 @@ export default class MainViews {
             const mainView = (mainSection as HTMLElement).dataset.view;
             if (!mainView) {
                 return;
+            }
+
+            if (mainView === VIEWS.winners) {
+                document.body.dispatchEvent(new CustomEvent(WINNERS_ACTION.action));
             }
 
             if (target.dataset.btn == mainView) {

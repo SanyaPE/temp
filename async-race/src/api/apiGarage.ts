@@ -2,8 +2,19 @@ import { CARS_ON_PAGE, BASE_URL, PATH } from '../constants/const';
 import { ICarParam, ICar } from '../models/models';
 
 export default class ApiGarage {
-    static async getCars(page?: number) {
+    static async getCars(page = 1) {
         const url = `${BASE_URL}${PATH.garage}?_page=${page}&_limit=${CARS_ON_PAGE}`;
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            return data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    static async getCar(id: number) {
+        const url = `${BASE_URL}${PATH.garage}/${id}`;
         try {
             const res = await fetch(url);
             const data = await res.json();

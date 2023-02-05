@@ -13,7 +13,7 @@ export default class ApiWinners {
         }
     }
 
-    static async getWinner(id = 1) {
+    static async getWinner(id: number) {
         const url = `${BASE_URL}${PATH.winners}/${id}`;
         try {
             const res = await fetch(url);

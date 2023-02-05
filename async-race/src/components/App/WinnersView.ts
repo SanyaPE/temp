@@ -3,11 +3,13 @@ import { IAppState, IWinner } from '../../models/models';
 import Pagination from '../Common/Pagination';
 import ApiWinners from '../../api/apiWinners';
 import Winner from './Winner';
+import ApiGarage from '../../api/apiGarage';
 
 export class Winners {
     appState;
     pagination = new Pagination(VIEWS.winners);
     apiWinners = ApiWinners;
+    apiGarage = ApiGarage;
 
     constructor(appState: IAppState) {
         this.appState = appState;
@@ -23,13 +25,19 @@ export class Winners {
         try {
             this.appState.winners = <Array<IWinner>>await this.apiWinners.getWinners(currentWinnersPage);
 
+            const cars = await Promise.all(this.appState.winners.map((winner) => this.apiGarage.getCar(winner.id)));
+            this.appState.winners.forEach((winner, idx) => {
+                winner.name = cars[idx].name;
+                winner.color = cars[idx].color;
+            });
+
             winnersTable.replaceChildren();
-            Object.values(this.appState.winners).forEach((winnerData) => {
-                new Winner(<IWinner>winnerData).appendTo(winnersTable);
+            Object.values(this.appState.winners).forEach((winnerData, idx) => {
+                const idInWinnersTable = (this.appState.currentWinnersPage - 1) * 10 + idx + 1;
+                new Winner(<IWinner>winnerData, idInWinnersTable).appendTo(winnersTable);
             });
 
             this.appState.totalWinners = Number(await this.apiWinners.getCount()) || 0;
-            console.log(this.appState.totalWinners);
             const { totalWinners } = this.appState;
             this.pagination.paginate(totalWinners, currentWinnersPage);
         } catch (err) {

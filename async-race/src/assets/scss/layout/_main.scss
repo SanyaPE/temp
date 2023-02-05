@@ -24,19 +24,10 @@ thead th {
     background: #1d1f20;
 }
 
-tbody {
-    counter-reset: rowNumber;
-}
-
 tr {
-    counter-increment: rowNumber;
     background: #506969;
     border-bottom: 1px solid #FFF;
     margin-bottom: 0.1em;
-}
-
-table tr td:first-child::before {
-    content: counter(rowNumber);
 }
 
 th, td {
