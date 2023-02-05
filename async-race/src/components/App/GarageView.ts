@@ -1,7 +1,8 @@
-import ApiClient from '../../api/apiClient';
+import ApiGarage from '../../api/apiGarage';
+import ApiWinners from '../../api/apiWinners';
 import { CAR_BRANDS } from '../../constants/carBrands';
 import { CAR_MODELS } from '../../constants/carModels';
-import { GARAGE_ACTION, CAR_GENERATE_COUNT } from '../../constants/const';
+import { GARAGE_ACTION, CAR_GENERATE_COUNT, VIEWS } from '../../constants/const';
 import { IAppState, ICar, IControlInput, IMainView } from '../../models/models';
 import { randomColor } from '../../utils/randColor';
 import { randomName } from '../../utils/randName';
@@ -9,17 +10,17 @@ import Pagination from '../Common/Pagination';
 import Car from './Car';
 
 export class Garage {
-    apiClient = new ApiClient();
     viewPages;
     controlInput;
     appState;
-    pagination;
+    pagination = new Pagination(VIEWS.garage);
+    apiGarage = ApiGarage;
+    apiWinners = ApiWinners;
 
     constructor(appState: IAppState, viewPages: IMainView, controlInput: IControlInput) {
         this.viewPages = viewPages;
         this.controlInput = controlInput;
         this.appState = appState;
-        this.pagination = new Pagination('garage');
     }
 
     async renderCarsOnPage() {
@@ -29,14 +30,14 @@ export class Garage {
         this.viewPages.elements.race = raceElement;
 
         try {
-            this.appState.carsToRace = <Array<ICar>>await this.apiClient.getCars(currentGaragePage);
+            this.appState.carsToRace = <Array<ICar>>await this.apiGarage.getCars(currentGaragePage);
             raceElement.replaceChildren();
 
             Object.values(this.appState.carsToRace).forEach((carData) => {
                 new Car(<ICar>carData).appendTo(raceElement);
             });
 
-            this.appState.totalCars = Number(await this.apiClient.getCount()) || 0;
+            this.appState.totalCars = Number(await this.apiGarage.getCount()) || 0;
             const { totalCars } = this.appState;
             this.pagination.paginate(totalCars, currentGaragePage);
         } catch (err) {
@@ -45,7 +46,7 @@ export class Garage {
     }
 
     async startCar(carId: number) {
-        const carStartData = await this.apiClient.startEngine(carId);
+        const carStartData = await this.apiGarage.startEngine(carId);
         const { velocity, distance } = carStartData;
         const duration = distance / velocity;
 
@@ -74,14 +75,14 @@ export class Garage {
         }
 
         try {
-            await this.apiClient.driveEngine(carId);
+            await this.apiGarage.driveEngine(carId);
         } catch (error) {
             carAnimation.pause();
         }
     }
 
     async stopCar(carId: number) {
-        await this.apiClient.stopEngine(carId);
+        await this.apiGarage.stopEngine(carId);
         const car = this.appState.carsToRace.find((car: ICar) => car.id === carId);
         car?.animation?.cancel();
         this.enableBtn(String(carId), GARAGE_ACTION.start);
@@ -108,7 +109,7 @@ export class Garage {
             popUp.classList.add('show');
             const winnerTime = (animationFinished?.currentTime || 0) / 1000;
             popUp.textContent = `Winner is ${car.name} with time ${winnerTime.toFixed(2)}s!`;
-            // rerender WINNERS page + pagination
+            // TODO: ADD WINNER TO WINNERS TABLE
             btnReset?.removeAttribute('disabled');
             setTimeout(() => popUp.classList.remove('show'), 2000);
         });
@@ -141,9 +142,9 @@ export class Garage {
     async createCar(action: string) {
         if (action === GARAGE_ACTION.create) {
             const { color, name } = this.controlInput;
-            await this.apiClient.createCar({ name, color });
+            await this.apiGarage.createCar({ name, color });
         } else if (action === GARAGE_ACTION.generate) {
-            await this.apiClient.createCar({ name: randomName(CAR_BRANDS, CAR_MODELS), color: randomColor() });
+            await this.apiGarage.createCar({ name: randomName(CAR_BRANDS, CAR_MODELS), color: randomColor() });
         }
     }
 
@@ -163,13 +164,14 @@ export class Garage {
     async updateCar() {
         this.appState.selectedCar.name = this.controlInput.name;
         this.appState.selectedCar.color = this.controlInput.color;
-        await this.apiClient.updateCar(this.appState.selectedCar);
+        await this.apiGarage.updateCar(this.appState.selectedCar);
         this.renderCarsOnPage();
     }
 
     async deleteCar(id: number) {
-        await this.apiClient.deleteCar(id);
+        await this.apiGarage.deleteCar(id);
         this.renderCarsOnPage();
+        // TODO: deleted from WINNERS table as well
     }
 
     enableBtn(id: string, action: string) {

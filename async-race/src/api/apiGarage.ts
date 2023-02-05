@@ -1,8 +1,8 @@
 import { CARS_ON_PAGE, BASE_URL, PATH } from '../constants/const';
-import { IParam, ICar } from '../models/models';
+import { ICarParam, ICar } from '../models/models';
 
-export default class ApiClient {
-    async getCars(page?: number) {
+export default class ApiGarage {
+    static async getCars(page?: number) {
         const url = `${BASE_URL}${PATH.garage}?_page=${page}&_limit=${CARS_ON_PAGE}`;
         try {
             const res = await fetch(url);
@@ -13,7 +13,7 @@ export default class ApiClient {
         }
     }
 
-    async getCount() {
+    static async getCount() {
         const url = `${BASE_URL}${PATH.garage}?_page=1&_limit=${CARS_ON_PAGE}`;
         try {
             const res = await fetch(url);
@@ -24,7 +24,7 @@ export default class ApiClient {
         }
     }
 
-    async createCar(carParam: IParam) {
+    static async createCar(carParam: ICarParam) {
         const url = `${BASE_URL}${PATH.garage}`;
         const param = {
             method: 'POST',
@@ -42,7 +42,7 @@ export default class ApiClient {
         }
     }
 
-    async deleteCar(id: number) {
+    static async deleteCar(id: number) {
         const url = `${BASE_URL}${PATH.garage}/${id}`;
         const param = {
             method: 'DELETE',
@@ -56,7 +56,7 @@ export default class ApiClient {
         }
     }
 
-    async updateCar({ id, name, color }: ICar) {
+    static async updateCar({ id, name, color }: ICar) {
         const url = `${BASE_URL}${PATH.garage}/${id}`;
         const param = {
             method: 'PUT',
@@ -74,7 +74,7 @@ export default class ApiClient {
         }
     }
 
-    async startEngine(id: number) {
+    static async startEngine(id: number) {
         const url = `${BASE_URL}${PATH.engine}?id=${id}&status=started`;
         const param = {
             method: 'PATCH',
@@ -88,7 +88,7 @@ export default class ApiClient {
         }
     }
 
-    async stopEngine(id: number) {
+    static async stopEngine(id: number) {
         const url = `${BASE_URL}${PATH.engine}?id=${id}&status=stopped`;
         const param = {
             method: 'PATCH',
@@ -102,7 +102,7 @@ export default class ApiClient {
         }
     }
 
-    async driveEngine(id: number) {
+    static async driveEngine(id: number) {
         const url = `${BASE_URL}${PATH.engine}?id=${id}&status=drive`;
         const param = {
             method: 'PATCH',

@@ -14,3 +14,37 @@
     font-size: 1.5em;
     font-weight: bold;
 }
+
+table {
+    margin: 0.7em auto;
+}
+
+thead th {
+    font-weight: bold;
+    background: #1d1f20;
+}
+
+tbody {
+    counter-reset: rowNumber;
+}
+
+tr {
+    counter-increment: rowNumber;
+    background: #506969;
+    border-bottom: 1px solid #FFF;
+    margin-bottom: 0.1em;
+}
+
+tr:nth-child(even) {
+    background: #202c2c;
+}
+
+table tr td:first-child::before {
+    content: counter(rowNumber);
+}
+
+th, td {
+    text-align: center;
+    padding: 0.5em;
+}
+  

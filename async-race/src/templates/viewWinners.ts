@@ -10,13 +10,21 @@ export const WINNERS = `
                 <span class="page__title">Page:</span>
                 <span class="page__count" id="page-winners">1</span>
             </div>
-            <div class="pagination" id="pagination-garage">
+            <div class="pagination" id="pagination-winners">
                 <button class="btn pagination__item" data-btn="first">first page</button>
                 <button class="btn pagination__item" data-btn="prev">prev</button>
                 <button class="btn pagination__item" data-btn="next">next</button>
                 <button class="btn pagination__item" data-btn="last">last page</button>           
             </div>
-            <div id="winners">
-            </div>
+            <table>
+                <thead>
+                    <th>#</th>
+                    <th>Color</th>
+                    <th>Name</th>
+                    <th>Wins</th>
+                    <th>Best Time(sec)</th>
+                </thead>
+                <tbody id="winners"></tbody>
+            </table>
         </div>
     </section>`;

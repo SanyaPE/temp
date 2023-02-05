@@ -27,6 +27,10 @@ const GARAGE_ACTION = {
     page: 'page',
 };
 
+const WINNERS_ACTION = {
+    action: 'winners-action',
+};
+
 const PAGE_ACTION = {
     winnersPaginate: 'winners-paginate',
     garagePaginate: 'garage-paginate',
@@ -34,6 +38,17 @@ const PAGE_ACTION = {
     prev: 'prev',
     next: 'next',
     last: 'last',
+};
+
+const SORT_DIR = {
+    asc: 'ASC',
+    desc: 'DESC',
+};
+
+const SORT_BY = {
+    id: 'id',
+    wins: 'wins',
+    time: 'time',
 };
 
 const CAR_GENERATE_COUNT = 100;
@@ -50,4 +65,7 @@ export {
     VIEWS,
     GARAGE_ACTION,
     PAGE_ACTION,
+    WINNERS_ACTION,
+    SORT_DIR,
+    SORT_BY,
 };

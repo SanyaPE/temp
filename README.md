@@ -1,3 +1,9 @@
+Task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/async-race.md
+API: https://github.com/mikhama/async-race-api
+Demo:https://youtu.be/sTXtlBLh-Ts
+AirBnB Style Guide: https://github.com/airbnb/javascript
+PR process: https://docs.app.rs.school/#/platform/pull-request-review-process
+
 ### Functional requirements:
 
 #### Basic structure:

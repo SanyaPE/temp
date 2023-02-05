@@ -16,14 +16,14 @@ export default class Pagination {
         this.paginationElement?.addEventListener('click', (e: Event) => this.dispatchPaginationEvent(e));
     }
 
-    paginate(totalCars: number, currentGaragePage: number) {
+    paginate(totalCars: number, currentPage: number) {
         if (this.totalCarsElement) {
             this.totalCars = totalCars;
             this.totalCarsElement.textContent = String(totalCars);
         }
         if (this.pageElement) {
-            this.currentPage = currentGaragePage;
-            this.pageElement.textContent = String(currentGaragePage);
+            this.currentPage = currentPage;
+            this.pageElement.textContent = String(currentPage);
         }
     }
 
