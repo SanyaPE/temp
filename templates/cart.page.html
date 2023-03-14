@@ -1,0 +1,50 @@
+<section class="cart">
+    <div class="cart__container container">
+        <div class="cart__products">
+            <div class="cart__products-head">
+                <h2 class="cart__title">Products in cart</h2>
+                <span class="cart__limit">Limit:</span>
+                <input class="cart__limit-count" type="number" min="1" max="5" value="1" />
+                <span class="cart__page">Page:</span>
+                <button class="cart__page-btn"> < </button>
+                <span class="cart__page-count">1</span>
+                <button class="cart__page-btn"> > </button>
+            </div>
+            <div class="cart__products-body">
+                <div class="cart__products-item">
+                    <span class="cart__products-count">1</span>
+                    <img class="cart__products-img" alt="img-1"></img>
+                    <div class="cart__products-info">
+                        <span class="cart__products-name">iPhone 9</span>
+                        <span class="cart__products-desc"> An apple mobile which is nothing like apple </span>
+                    </div>
+                    <div class="cart__products-status">
+                        <div class="cart__products-status">
+                            <span class="cart__products-stock">Stock</span>
+                            <button class="cart__products-btn"> + </button>
+                            <span class="cart__products-qty"></span>
+                            <button class="cart__products-btn"> - </button>
+                            <span class="cart__products-amount"> €899.00 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart__summary">
+            <div class="cart__summary-head">
+                <h2 class="cart__title">Summary</h2>
+            </div>
+            <div class="cart__summary-body">
+                
+                    <div class="cart__summary-qty">Products:
+                        <span id="amount-qty">0</span>
+                    </div>
+                    <div class="cart__summary-price">Total: 
+                        <span id="amount-price">0</span>$
+                    </div>
+                    <input class="cart__promo" type="text" name="" id="" placeholder="Enter promo code">
+                    <button class="cart__summary-submit">BUY NOW!</button>
+            </div>
+        </div>
+    </div>
+</section>
