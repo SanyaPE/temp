@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from '@youtube/pages/main/main.component';
-import { NotFoundComponent } from '@youtube/pages/not-found/not-found.component';
+import { NotFoundComponent } from './not-found/pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -11,6 +11,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

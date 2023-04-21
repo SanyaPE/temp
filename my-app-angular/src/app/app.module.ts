@@ -8,17 +8,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialDesignModule } from './material-design/material-design.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,
-    MaterialDesignModule
+    MaterialDesignModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

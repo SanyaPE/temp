@@ -4,6 +4,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MaterialDesignModule } from '../material-design/material-design.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { SearchInputComponent } from './components/search-input/search-input.component';
 
 
 
@@ -11,11 +13,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     HeaderComponent,
     FooterComponent,
+    SearchInputComponent,
   ],
   imports: [
     CommonModule,
     MaterialDesignModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   exports: [HeaderComponent, FooterComponent]
 })
