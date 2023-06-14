@@ -1,0 +1,118 @@
+/* _-_-_- base/BASE -_-_-_ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+
+ul[class],
+ol[class] {
+    list-style: none;
+}
+
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+article > * + * {
+    margin-top: 1em;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+/* _-_-_- base/LAYOUT -_-_-_ */
+body {
+    background-color: darkgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+main {
+    flex: 1;
+}
+.container {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20rem;
+    padding-right: 20rem;
+    width: 100%;
+}
+.header,
+.footer {
+    background-color: black;
+    color: white;
+}
+
+/* _-_-_- HEADER -_-_-_ */
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__btn {
+    border-radius: 5px;
+    border: solid 1px white;
+    cursor: pointer;
+}
+
+.header__btn.active {
+    color: brown;
+    font-weight: 700;
+}
+.header__btn:hover {
+    background-color: brown;
+    color: white;
+}
+
+/* _-_-_- NAVIGATION -_-_-_ */
+.nav {
+    margin-left: auto;
+}
+.lang__btn {
+    margin-left: 20px;
+}
