@@ -22,8 +22,8 @@ export class Models {
     }
     setPage(page) {
         this.settings.page = page;
-        console.log(page);
-        // localStorage.setItem('settings', this.settings);
+        console.log(this.settings);
+        localStorage.setItem('settings', JSON.stringify(this.settings));
     }
     getSettings() {
         return localStorage.getItem('settings');

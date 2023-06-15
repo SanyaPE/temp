@@ -10,35 +10,37 @@ import { Models } from '../models/Models.js';
 export class View {
     constructor(settings) {
         this.body = document.querySelector('body');
-        this.settings = settings;
+        // this.settings = settings;
     }
     init() {
         console.log('start view');
         this.renderLayout();
-        this.renderPage();
+        // this.renderPage();
         this.controlPage();
         this.controlLang();
     }
     renderLayout() {
-        const header = HEADER.replace(/{{lang}}/gi, this.settings.lang);
-        this.body.insertAdjacentHTML('beforeend', header);
+        // const header = HEADER.replace(/{{lang}}/gi, this.settings.lang);
+        this.body.insertAdjacentHTML('beforeend', HEADER);
         this.body.insertAdjacentHTML('beforeend', MAIN);
         this.body.insertAdjacentHTML('beforeend', FOOTER);
     }
-    renderPage() {
-        const main = this.body.querySelector('#main');
-        main.innerHTML = '';
-        if (this.settings.page === 'keyboard') {
-            main.insertAdjacentHTML('beforeend', KEYBOARD__PAGE);
-        }
-        if (this.settings.page === 'gallery') {
-            main.insertAdjacentHTML('beforeend', GALLERY__PAGE);
-        }
-    }
+    // renderPage() {
+    //     const main = this.body.querySelector('#main');
+    //     main.innerHTML = '';
+    //     if (this.settings.page === 'keyboard') {
+    //         main.insertAdjacentHTML('beforeend', KEYBOARD__PAGE);
+    //     }
+    //     if (this.settings.page === 'gallery') {
+    //         main.insertAdjacentHTML('beforeend', GALLERY__PAGE);
+    //     }
+    // }
     controlPage() {
         const nav = this.body.querySelector('.nav');
-        nav.addEventListener('click', () => {
-            console.log(this);
+        nav.addEventListener('click', (e) => {
+            const target = e.target;
+            const page = target.innerHTML
+            Controller.setPage(page)
         });
     }
     controlLang() {
