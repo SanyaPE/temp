@@ -2,8 +2,6 @@ import keysEn from './keysEn.js';
 import keysRu from './keysRu.js';
 
 export class Models {
-    static lang = 'en';
-    static page = 'keyboard';
     constructor() {
         if (this.getSettings()) this.settings = JSON.parse(this.getSettings());
         else
@@ -17,12 +15,10 @@ export class Models {
     }
     setLang(lang) {
         this.settings.lang = lang;
-        console.log(this.settings);
         localStorage.setItem('settings', JSON.stringify(this.settings));
     }
     setPage(page) {
         this.settings.page = page;
-        console.log(this.settings);
         localStorage.setItem('settings', JSON.stringify(this.settings));
     }
     getSettings() {

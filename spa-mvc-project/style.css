@@ -101,8 +101,9 @@ main {
 }
 
 .header__btn.active {
-    color: brown;
     font-weight: 700;
+    background-color: brown;
+    color: white;
 }
 .header__btn:hover {
     background-color: brown;
