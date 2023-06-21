@@ -7,6 +7,7 @@ import { ABOUT__PAGE } from './components/about.page.js';
 import { Element } from './utils/Element.js';
 import { Controller } from '../controller/controller.js';
 import { Models } from '../models/Models.js';
+import { i18nObj } from '../models/language.js';
 
 export class View {
     constructor(settings) {
@@ -51,26 +52,9 @@ export class View {
             about: ABOUT__PAGE,
             gallery: GALLERY__PAGE,
         };
-        // this.pages = { `${page}`: 'hui' };
-        console.log('page', page);
-        console.log('this', this);
-        console.log('this.pages[page]', this.pages[page]);
-        // if (this.page[page]) main.innerHTML = this.page[page];
-        // else {
-        //     main.innerHTML = '';
-        //     main.insertAdjacentHTML('beforeend', pages[page]);
-        // }
+        main.innerHTML = pages[page];
     }
-    // renderPage() {
-    //     const main = this.body.querySelector('#main');
-    //     main.innerHTML = '';
-    //     if (this.settings.page === 'keyboard') {
-    //         main.insertAdjacentHTML('beforeend', KEYBOARD__PAGE);
-    //     }
-    //     if (this.settings.page === 'gallery') {
-    //         main.insertAdjacentHTML('beforeend', GALLERY__PAGE);
-    //     }
-    // }
+
     controlPage() {
         const nav = this.body.querySelector('.nav');
         nav.addEventListener('click', (e) => {
@@ -85,6 +69,15 @@ export class View {
             const target = e.target;
             target.innerHTML = target.innerHTML === 'ru' ? 'en' : 'ru';
             Controller.setLang(target.innerHTML);
+            this.translate(target.innerHTML);
+        });
+    }
+    translate(lang) {
+        const dataList = document.querySelectorAll('[data-i18n]');
+        dataList.forEach((elem) => {
+            // console.log(elem.textContent);
+            // console.log(elem.dataset.i18n);
+            elem.textContent = i18nObj[lang][elem.dataset.i18n];
         });
     }
     renderKeyboard() {}

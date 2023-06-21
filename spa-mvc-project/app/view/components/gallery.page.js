@@ -1,7 +1,7 @@
 export const GALLERY__PAGE = `
-<section class="keyboard">
+<section class="gallery">
     <div class="container">
-        <h2>GALLERY PAGE</h2>
+        <h2 data-i18n="gallery-page">GALLERY PAGE</h2>
     </div>
 </section>
 `;
