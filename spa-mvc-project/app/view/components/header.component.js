@@ -7,7 +7,7 @@ export const HEADER = `
             <button class="nav__btn header__btn" data-i18n="btn-gallery">gallery</button>
             <button class="nav__btn header__btn" data-i18n="btn-about">about</button>
         </nav>
-        <button class="lang__btn header__btn">{{lang}}</button>
+        <button class="lang__btn header__btn" data-i18n="btn-lang">lang</button>
     </div>
 </head>
 `;

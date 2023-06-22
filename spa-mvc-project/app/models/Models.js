@@ -1,27 +1,32 @@
 import keysEn from './keysEn.js';
 import keysRu from './keysRu.js';
+const SETTINGS_DEFAULT = {
+    lang: 'ru',
+    page: 'keyboard',
+};
 
 export class Models {
+    settings = null;
     constructor() {
-        if (this.getSettings()) this.settings = JSON.parse(this.getSettings());
-        else
-            this.settings = {
-                lang: 'en',
-                page: 'keyboard',
-            };
+        this.init();
     }
     init() {
         console.log('start models ');
+        this.settings = !this.getLocalStorage() ? SETTINGS_DEFAULT : this.getLocalStorage();
     }
     setLang(lang) {
         this.settings.lang = lang;
-        localStorage.setItem('settings', JSON.stringify(this.settings));
     }
     setPage(page) {
         this.settings.page = page;
-        localStorage.setItem('settings', JSON.stringify(this.settings));
+    }
+    setLocalStorage() {
+        window.addEventListener('beforeunload', () => localStorage.setItem('settings', this.settings));
+    }
+    getLocalStorage() {
+        return JSON.parse(localStorage.getItem('settings'));
     }
     getSettings() {
-        return localStorage.getItem('settings');
+        return this.settings;
     }
 }

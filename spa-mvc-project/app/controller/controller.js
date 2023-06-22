@@ -5,37 +5,42 @@ import { KeyboardController } from './keyboard.controller.js';
 import { AboutController } from './about.controller.js';
 
 export class Controller {
-    static models;
-    static view;
-    constructor() {}
+    #models = null;
+    #view = null;
+    constructor() {
+        this.init();
+    }
     init() {
         console.log('start main controller');
-        Controller.models = new Models();
-        Controller.view = new View();
-        Controller.models.init();
-        Controller.view.init();
-        this.presetting(Controller.models.settings)
-        this.renderPage(Controller.models.settings);
+        // Controller.models = new Models();
+        // Controller.view = new View(this);
+        this.#models = new Models();
+        this.#view = new View(this);
+        // this.presetting(Controller.models.settings);
+        // this.renderPage(Controller.models.settings);
 
         // this.selectPage()
         // this.initController(Controller.models.settings.page);
         // view.renderElement();
     }
-    selectController(page) {
+    createPageController() {
+        console.log('createPageController');
+        console.log(this.models.getSettings());
+    }
+    selectController(page) {}
+    getSettings() {
+        return this.#models.getSettings();
         
     }
-    getSettings(settings) {
-        
+    presetting(settings) {
+        Controller.view.presetting(settings);
     }
-    presetting(settings){
-        Controller.view.presetting(settings)
-    }
-    renderPage(settings){
+    renderPage(settings) {
         const { page, lang } = settings;
         if (page === 'keyboard') Controller.page = new KeyboardController().init();
         if (page === 'gallery') Controller.page = new GalleryController().init();
         if (page === 'about') Controller.page = new AboutController().init();
-        Controller.view.renderPage(page)
+        Controller.view.renderPage(page);
     }
     static setPage(page) {
         Controller.models.setPage(page);

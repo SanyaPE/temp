@@ -9,21 +9,46 @@ import { Controller } from '../controller/controller.js';
 import { Models } from '../models/Models.js';
 import { i18nObj } from '../models/language.js';
 
+const LAYOUT = [HEADER, MAIN, FOOTER];
+
 export class View {
-    constructor(settings) {
+    constructor(controller) {
         this.body = document.querySelector('body');
+        this.controller = controller;
+        this.init();
     }
     init() {
         console.log('start view');
+        // this.getSettings();
         this.renderLayout();
-        this.controlPage();
-        this.controlLang();
-        this.toggleNavigation();
+        // this.controlPage();
+        // this.controlLang();
+        // this.toggleNavigation();
+    }
+    getSettings() {
+        // this.settings = this.controller.getSettings()
+        return this.controller.getSettings();
     }
     renderLayout() {
-        this.body.insertAdjacentHTML('beforeend', HEADER);
-        this.body.insertAdjacentHTML('beforeend', MAIN);
-        this.body.insertAdjacentHTML('beforeend', FOOTER);
+        // this.changeModels(HEADER);
+        LAYOUT.forEach(item => this.body.appendChild(this.getModels(item)) )
+
+        // this.body.appendChild(this.getModels(HEADER));
+        // this.body.appendChild(this.createNode(HEADER));
+        // this.body.insertAdjacentHTML('beforeend', MAIN);
+        // this.body.insertAdjacentHTML('beforeend', FOOTER);
+    }
+    getModels(template) {
+        const tempElement = document.createElement('div');
+        tempElement.insertAdjacentHTML('beforeend', template);
+        const dataList = tempElement.querySelectorAll('[data-i18n]');
+        const { lang, page } = this.controller.getSettings();
+        console.log(lang, page);
+        dataList.forEach((item) => {
+            console.log(item);
+            item.textContent = i18nObj[lang][item.dataset.i18n];
+        });
+        return tempElement.lastChild;
     }
     presetting(settings) {
         const { page, lang } = settings;

@@ -8,6 +8,7 @@ export const i18nObj = {
         'btn-keyboard': 'keyboard',
         'btn-about': 'about',
         'btn-gallery': 'gallery',
+        'btn-lang': 'ru',
     },
     ru: {
         'header-title': 'шапка',
@@ -18,5 +19,6 @@ export const i18nObj = {
         'btn-keyboard': 'клавиатура',
         'btn-about': 'контакт',
         'btn-gallery': 'галерея',
+        'btn-lang': 'en',
     },
 };
