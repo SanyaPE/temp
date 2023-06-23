@@ -16,6 +16,7 @@ export class Controller {
         // Controller.view = new View(this);
         this.#models = new Models();
         this.#view = new View(this);
+        // this.createPageController();
         // this.presetting(Controller.models.settings);
         // this.renderPage(Controller.models.settings);
 
@@ -25,12 +26,14 @@ export class Controller {
     }
     createPageController() {
         console.log('createPageController');
-        console.log(this.models.getSettings());
+        const { page, lang } = this.getSettings();
+        if (page === 'about') this.currentPage = new AboutController();
+        if (page === 'keyboard') this.currentPage = new KeyboardController();
+        if (page === 'gallery') this.currentPage = new GalleryController();
     }
     selectController(page) {}
     getSettings() {
         return this.#models.getSettings();
-        
     }
     presetting(settings) {
         Controller.view.presetting(settings);

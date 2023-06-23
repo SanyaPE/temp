@@ -1,6 +1,6 @@
+import { HEADER } from './components/header.component.js';
 import { FOOTER } from './components/footer.component.js';
 import { MAIN } from './components/main.component.js';
-import { HEADER } from './components/header.component.js';
 import { KEYBOARD__PAGE } from './components/keyboard.page.js';
 import { GALLERY__PAGE } from './components/gallery.page.js';
 import { ABOUT__PAGE } from './components/about.page.js';
@@ -10,6 +10,11 @@ import { Models } from '../models/Models.js';
 import { i18nObj } from '../models/language.js';
 
 const LAYOUT = [HEADER, MAIN, FOOTER];
+const PAGES = {
+    keyboard: KEYBOARD__PAGE,
+    about: ABOUT__PAGE,
+    gallery: GALLERY__PAGE,
+};
 
 export class View {
     constructor(controller) {
@@ -22,43 +27,28 @@ export class View {
         // this.getSettings();
         this.renderLayout();
         // this.controlPage();
-        // this.controlLang();
-        // this.toggleNavigation();
+        this.toggleLang();
+        this.toggleNavigation();
     }
     getSettings() {
-        // this.settings = this.controller.getSettings()
         return this.controller.getSettings();
     }
     renderLayout() {
-        // this.changeModels(HEADER);
-        LAYOUT.forEach(item => this.body.appendChild(this.getModels(item)) )
-
-        // this.body.appendChild(this.getModels(HEADER));
-        // this.body.appendChild(this.createNode(HEADER));
-        // this.body.insertAdjacentHTML('beforeend', MAIN);
-        // this.body.insertAdjacentHTML('beforeend', FOOTER);
+        LAYOUT.forEach((item) => {
+            this.body.insertAdjacentHTML('beforeend', this.getModels(item));
+        });
     }
     getModels(template) {
         const tempElement = document.createElement('div');
         tempElement.insertAdjacentHTML('beforeend', template);
         const dataList = tempElement.querySelectorAll('[data-i18n]');
         const { lang, page } = this.controller.getSettings();
-        console.log(lang, page);
         dataList.forEach((item) => {
-            console.log(item);
             item.textContent = i18nObj[lang][item.dataset.i18n];
         });
-        return tempElement.lastChild;
+        return tempElement.innerHTML;
     }
-    presetting(settings) {
-        const { page, lang } = settings;
-        const langBtn = this.body.querySelector('.lang__btn');
-        const navBtns = this.body.querySelectorAll('.nav__btn');
-        langBtn.textContent = lang;
-        navBtns.forEach((btn) => {
-            if (btn.textContent === page) btn.classList.add('active');
-        });
-    }
+
     toggleNavigation() {
         const nav = this.body.querySelector('.nav');
         const navBtns = nav.querySelectorAll('.nav__btn');
@@ -72,12 +62,7 @@ export class View {
     }
     renderPage(page) {
         const main = this.body.querySelector('#main');
-        const pages = {
-            keyboard: KEYBOARD__PAGE,
-            about: ABOUT__PAGE,
-            gallery: GALLERY__PAGE,
-        };
-        main.innerHTML = pages[page];
+        main.innerHTML = PAGES[page];
     }
 
     controlPage() {
@@ -88,7 +73,7 @@ export class View {
             Controller.setPage(page);
         });
     }
-    controlLang() {
+    toggleLang() {
         const langBtn = this.body.querySelector('.lang__btn');
         langBtn.addEventListener('click', (e) => {
             const target = e.target;

@@ -1,8 +1,8 @@
 import keysEn from './keysEn.js';
 import keysRu from './keysRu.js';
 const SETTINGS_DEFAULT = {
-    lang: 'ru',
-    page: 'keyboard',
+    lang: 'en',
+    page: 'about',
 };
 
 export class Models {

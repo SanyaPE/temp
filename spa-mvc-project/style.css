@@ -98,6 +98,7 @@ main {
     border-radius: 5px;
     border: solid 1px white;
     cursor: pointer;
+    text-transform: uppercase;
 }
 
 .header__btn.active {
@@ -116,4 +117,7 @@ main {
 }
 .lang__btn {
     margin-left: 20px;
+}
+h2{
+    text-transform: uppercase;
 }

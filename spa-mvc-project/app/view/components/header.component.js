@@ -9,5 +9,5 @@ export const HEADER = `
         </nav>
         <button class="lang__btn header__btn" data-i18n="btn-lang">lang</button>
     </div>
-</head>
+</header>
 `;
