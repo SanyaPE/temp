@@ -30,9 +30,7 @@ export class View {
         this.toggleLang();
         this.toggleNavigation();
     }
-    getSettings() {
-        return this.controller.getSettings();
-    }
+
     renderLayout() {
         LAYOUT.forEach((item) => {
             this.body.insertAdjacentHTML('beforeend', this.getModels(item));
@@ -49,37 +47,40 @@ export class View {
         return tempElement.innerHTML;
     }
 
+    selectPageController() {
+        this.controller.selectPageController();
+    }
+
+    // controlPage() {
+    //     const nav = this.body.querySelector('.nav');
+    //     nav.addEventListener('click', (e) => {
+    //         const target = e.target;
+    //         const page = target.innerHTML;
+    //         console.log(page);
+    //         // this.controller.setPage(page);
+    //     });
+    // }
+    toggleLang() {
+        const langBtn = this.body.querySelector('.lang__btn');
+        langBtn.addEventListener('click', (e) => {
+            const target = e.target;
+            const lang = target.innerHTML;
+            this.controller.setLang(lang);
+            target.innerHTML = target.innerHTML === 'ru' ? 'en' : 'ru';
+            this.translate(target.innerHTML);
+        });
+    }
     toggleNavigation() {
         const nav = this.body.querySelector('.nav');
         const navBtns = nav.querySelectorAll('.nav__btn');
         nav.addEventListener('click', (event) => {
             const target = event.target;
+            const page = target.textContent;
             navBtns.forEach((btn) => {
                 btn === target ? btn.classList.add('active') : btn.classList.remove('active');
             });
-            this.renderPage(target.textContent);
-        });
-    }
-    renderPage(page) {
-        const main = this.body.querySelector('#main');
-        main.innerHTML = PAGES[page];
-    }
-
-    controlPage() {
-        const nav = this.body.querySelector('.nav');
-        nav.addEventListener('click', (e) => {
-            const target = e.target;
-            const page = target.innerHTML;
-            Controller.setPage(page);
-        });
-    }
-    toggleLang() {
-        const langBtn = this.body.querySelector('.lang__btn');
-        langBtn.addEventListener('click', (e) => {
-            const target = e.target;
-            target.innerHTML = target.innerHTML === 'ru' ? 'en' : 'ru';
-            Controller.setLang(target.innerHTML);
-            this.translate(target.innerHTML);
+            console.log('page-1', page);
+            this.controller.setPage(page);
         });
     }
     translate(lang) {

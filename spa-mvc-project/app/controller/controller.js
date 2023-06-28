@@ -5,50 +5,32 @@ import { KeyboardController } from './keyboard.controller.js';
 import { AboutController } from './about.controller.js';
 
 export class Controller {
-    #models = null;
-    #view = null;
+    currentPage = null;
     constructor() {
+        this.models = new Models();
+        this.view = new View(this);
         this.init();
     }
     init() {
         console.log('start main controller');
-        // Controller.models = new Models();
-        // Controller.view = new View(this);
-        this.#models = new Models();
-        this.#view = new View(this);
-        // this.createPageController();
-        // this.presetting(Controller.models.settings);
-        // this.renderPage(Controller.models.settings);
-
-        // this.selectPage()
-        // this.initController(Controller.models.settings.page);
-        // view.renderElement();
+        this.selectPageController();
     }
-    createPageController() {
-        console.log('createPageController');
+    selectPageController() {
         const { page, lang } = this.getSettings();
         if (page === 'about') this.currentPage = new AboutController();
         if (page === 'keyboard') this.currentPage = new KeyboardController();
         if (page === 'gallery') this.currentPage = new GalleryController();
     }
-    selectController(page) {}
     getSettings() {
-        return this.#models.getSettings();
+        return this.models.getSettings();
     }
     presetting(settings) {
         Controller.view.presetting(settings);
     }
-    renderPage(settings) {
-        const { page, lang } = settings;
-        if (page === 'keyboard') Controller.page = new KeyboardController().init();
-        if (page === 'gallery') Controller.page = new GalleryController().init();
-        if (page === 'about') Controller.page = new AboutController().init();
-        Controller.view.renderPage(page);
+    setPage(page) {
+        this.models.setPage(page);
     }
-    static setPage(page) {
-        Controller.models.setPage(page);
-    }
-    static setLang(lang) {
-        Controller.models.setLang(lang);
+    setLang(lang) {
+        this.models.setLang(lang);
     }
 }

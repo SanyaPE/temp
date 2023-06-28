@@ -1,17 +1,12 @@
+
+import { AboutView } from "../view/about.view.js";
+
 export class AboutController {
     constructor() {
         this.init();
+        this.view  = new AboutView()
     }
     init() {
         console.log('AboutController');
-        this.buttonControl();
-    }
-    buttonControl() {
-        console.log('buttonControl');
-        const about = document.querySelector('.about');
-        const btns = about.querySelectorAll('button');
-        about.addEventListener('click', (e) => {
-            console.log(e.target);
-        });
     }
 }
