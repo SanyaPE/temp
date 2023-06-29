@@ -1,7 +1,7 @@
 import keysEn from './keysEn.js';
 import keysRu from './keysRu.js';
 const SETTINGS_DEFAULT = {
-    lang: 'en',
+    lang: 'ru',
     page: 'about',
 };
 
