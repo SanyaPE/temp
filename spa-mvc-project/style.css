@@ -114,10 +114,21 @@ main {
 /* _-_-_- NAVIGATION -_-_-_ */
 .nav {
     margin-left: auto;
+    display: flex;
+    gap: 5px;
+}
+.nav__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .lang__btn {
     margin-left: 20px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-h2{
+h2 {
     text-transform: uppercase;
 }
