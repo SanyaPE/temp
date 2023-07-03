@@ -1,9 +1,11 @@
-import { AboutView } from "../view/about.view.js";
+import { AboutView } from '../view/about.view.js';
+import { Controller } from './controller.js';
 
-export class AboutController {
-    constructor() {
+export class AboutController extends Controller {
+    constructor(models) {
+        super(models)
+        this.view = new AboutView(this);
         this.init();
-        this.view  = new AboutView(this)
     }
     init() {
         console.log('AboutController');

@@ -17,4 +17,14 @@ export class View {
         });
         return element;
     }
+    setActiveBtn(page) {
+        const nav = document.querySelector('.nav');
+        const btns = nav.querySelectorAll('[data-i18n]');
+        btns.forEach((btn) => {
+            console.log(btn.dataset.i18n.slice(4));
+            if (btn.dataset.i18n.slice(4) === page) {
+                btn.classList.add('active');
+            }
+        });
+    }
 }

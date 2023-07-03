@@ -8,10 +8,16 @@ export class AboutView extends View {
         this.init();
     }
     init() {
-        // const main = document.querySelector('#main');
-        const element = this.getModels(ABOUT__PAGE)
-        this.parent.innerHTML = ABOUT__PAGE;
+        this.renderPage()
+        
     }
+    renderPage(){
+        const { lang, page } = this.controller.getSettings();
+        const element = this.getModels(ABOUT__PAGE)
+        this.parent.append(this.translate(element, lang));
+        this.setActiveBtn(page)
+    }
+    
     controlButton() {
         const about = document.querySelector('.about');
         about.addEventListener('click', (e) => {
