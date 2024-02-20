@@ -1,4 +1,5 @@
 import { layout } from '../widgets/index';
+import { router } from './router/router';
 
 class App {
   constructor() {
@@ -7,6 +8,7 @@ class App {
 
   init() {
     layout();
+    router();
   }
 }
 export default App;
