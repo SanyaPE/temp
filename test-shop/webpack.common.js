@@ -10,6 +10,11 @@ module.exports = {
     assetModuleFilename: path.join('assets', '[name].[chunkhash:5][ext]'),
     clean: true,
   },
+  resolve: {
+    alias: {
+      pages: path.resolve(__dirname, 'src/pages/'),
+    },
+  },
   module: {
     rules: [
       {

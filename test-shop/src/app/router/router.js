@@ -1,7 +1,6 @@
 import { parseRoute } from './lib/parseRoute';
-// import { renderPage } from './lib/renderPage';
+import { renderPage } from './lib/renderPage';
 import { ROUTES } from './lib/routes';
-// import { page } from '../../pages/page.home';
 
 class Router {
   constructor() {
@@ -24,15 +23,13 @@ class Router {
     const { pageName } = ROUTES[pathRoute];
     const pageTemplate = await this.getPage(pageName);
     console.log('pageTemplate', pageTemplate);
-    // renderPage(pageTemplate);
+    renderPage(pageTemplate);
     // if (path) this.setState(path);
   }
 
   async getPage(pageName) {
-    const path = `../../pages/page.${pageName}`;
-    const { page } = await import(`${path}`);
-    console.log('page', page);
-    return page();
+    const { page } = await import(`pages/page.${pageName}`);
+    return page;
   }
 
   setState(path) {
