@@ -2,10 +2,10 @@ export const nav = () => {
   return `
     <nav class="nav">
       <ul class="nav__list">
-        <li class="nav__item nav__item--btn-1">
+        <li id="btn-home" class="nav__item nav__item--btn-1">
           <a href="/" class="nav__link">Home</a>
         </li>
-        <li class="nav__item nav__item--btn-1">
+        <li id="btn-about" class="nav__item nav__item--btn-1">
           <a href="/about" class="nav__link">About</a>
         </li>
         <li class="nav__item nav__item--btn-1">
@@ -13,7 +13,7 @@ export const nav = () => {
         </li>
       </ul>
       <div class="nav__btns">
-      <div class="nav__item nav__item--btn-2">
+      <div id="btn-cart" class="nav__item nav__item--btn-2">
         <a href="/cart" class="nav__link">
           <span class="btn-nav__body">Cart</span>
           <div class="btn-nav__append">
@@ -21,7 +21,7 @@ export const nav = () => {
           </div>
         </a>
       </div>
-      <div class="nav__item nav__item--btn-2">
+      <div id="btn-login" class="nav__item nav__item--btn-2">
         <a href="/login" class="nav__link">
           <span class="btn-nav__body">Login</span>
           <div class="btn-nav__append">

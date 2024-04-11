@@ -1,5 +1,7 @@
-export const page = () => {
+const page = (() => {
   return `
-    <h2>PRODUCTS PAGE</h2>
+    <h2>PRODUCT PAGE</h2>
     `;
-};
+})();
+
+export { page };
