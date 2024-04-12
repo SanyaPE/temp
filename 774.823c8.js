@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkhangman=self.webpackChunkhangman||[]).push([[774],{774:(a,n,h)=>{h.r(n),h.d(n,{page:()=>e});var e="\n    <h2>ABOUT PAGE</h2>\n    "}}]);

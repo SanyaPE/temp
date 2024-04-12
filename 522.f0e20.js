@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkhangman=self.webpackChunkhangman||[]).push([[522],{522:(n,a,h)=>{h.r(a),h.d(a,{page:()=>p});var p='\n    <h2>LOGIN PAGE</h2>\n    <input class="input"></input>\n    '}}]);
