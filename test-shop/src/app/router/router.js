@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 // import { parseRoute } from './lib/parseRoute';
 import { renderPage } from './lib/renderPage';
 import { ROUTES } from './lib/routes';
+import * as PAGES from '../../pages/index';
 
 class Router {
   constructor() {
@@ -24,8 +26,8 @@ class Router {
     const path = window.location.pathname;
     const route = ROUTES[path] || ROUTES[404];
     const { pageName } = route;
-    console.log('path from handleLocation =>', path);
-    renderPage(pageName);
+    const page = PAGES[pageName]();
+    renderPage(page);
   }
 
   manualRoute() {

@@ -1,24 +1,24 @@
 export const ROUTES = {
   '/': {
     path: '/',
-    pageName: 'home',
+    pageName: 'pageHome',
   },
   '/about': {
     path: '/about',
-    pageName: 'about',
+    pageName: 'pageAbout',
   },
   '/cart': {
     path: '/cart',
-    pageName: 'cart',
+    pageName: 'pageCart',
   },
   '/login': {
     path: '/login',
-    pageName: 'login',
+    pageName: 'pageLogin',
   },
 
   '/products': {
     path: '/products',
-    pageName: 'products',
+    pageName: 'pageProduct',
   },
   '/product/id': {
     path: '/product/id',
@@ -26,10 +26,10 @@ export const ROUTES = {
   },
   '/account': {
     ath: '/account',
-    pageName: 'account',
+    pageName: 'pageAccount',
   },
   404: {
     path: '/404',
-    pageName: 'not-found',
+    pageName: 'page404',
   },
 };

@@ -1,12 +1,6 @@
-async function getPage(pageName) {
-  const { page } = await import(`pages/page.${pageName}`);
-  return page;
-}
-
-export async function renderPage(pageName) {
+export async function renderPage(page) {
   const fragment = new DocumentFragment();
   const node = document.createElement('div');
-  const page = await getPage(pageName);
   node.insertAdjacentHTML('beforeend', page);
   [...node.children].forEach((elem) => {
     fragment.append(elem);
