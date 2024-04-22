@@ -28,7 +28,7 @@ export const ROUTES = {
     ath: '/account',
     pageName: 'account',
   },
-  '/404': {
+  404: {
     path: '/404',
     pageName: 'not-found',
   },

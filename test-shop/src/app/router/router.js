@@ -1,4 +1,4 @@
-import { parseRoute } from './lib/parseRoute';
+// import { parseRoute } from './lib/parseRoute';
 import { renderPage } from './lib/renderPage';
 import { ROUTES } from './lib/routes';
 
@@ -8,44 +8,41 @@ class Router {
   }
 
   init() {
-    this.setState();
-    const path = parseRoute();
-    console.log(path);
-    // this.manualRoute();
-    this.handleRoute(path);
     window.addEventListener('popstate', () => {
       this.handleRoute();
     });
+    this.handleRoute();
+    this.manualRoute();
   }
 
-  async handleRoute(path) {
-    const pathRoute = path || parseRoute();
-    const { pageName } = ROUTES[pathRoute];
-    const pageTemplate = await this.getPage(pageName);
-    console.log('pageTemplate', pageTemplate);
-    renderPage(pageTemplate);
-    // if (path) this.setState(path);
+  route(e) {
+    const event = e || window.e;
+    event.preventDefault();
   }
 
-  async getPage(pageName) {
-    const { page } = await import(`pages/page.${pageName}`);
-    return page;
+  handleRoute() {
+    const path = window.location.pathname;
+    const route = ROUTES[path] || ROUTES[404];
+    const { pageName } = route;
+    console.log('path from handleLocation =>', path);
+    renderPage(pageName);
+  }
+
+  manualRoute() {
+    const navItems = document.querySelectorAll('.nav__item');
+    navItems.forEach((navItem) => {
+      navItem.addEventListener('click', (e) => {
+        const target = e.target.closest('.nav__item');
+        const path = target.querySelector('a').pathname;
+        this.setState(path);
+        this.handleRoute();
+        e.preventDefault();
+      });
+    });
   }
 
   setState(path) {
     window.history.pushState({ pageName: ROUTES[path] }, ``, path);
   }
-
-  // manualRoute() {
-  //   const navItems = document.querySelectorAll('.nav__item');
-  //   navItems.forEach((navItem) => {
-  //     navItem.addEventListener('click', (e) => {
-  //       const target = e.target.closest('.nav__item');
-  //       const path = target.querySelector('a').pathname;
-  //       this.handleRoute(path);
-  //       e.preventDefault();
-  //     });
-  //   });
-  // }
 }
 export const router = () => new Router();
