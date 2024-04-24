@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 // import { parseRoute } from './lib/parseRoute';
+import { PAGES } from '../index';
 import { renderPage } from './lib/renderPage';
 import { ROUTES } from './lib/routes';
-import * as PAGES from '../../pages/index';
 
 class Router {
   constructor() {

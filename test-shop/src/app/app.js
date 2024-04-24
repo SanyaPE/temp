@@ -1,4 +1,4 @@
-import { layout } from '../widgets/index';
+import { layout } from './index';
 import { router } from './router/router';
 
 class App {
@@ -11,4 +11,5 @@ class App {
     router();
   }
 }
-export default App;
+
+export { App };
