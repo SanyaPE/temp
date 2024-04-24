@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkhangman=self.webpackChunkhangman||[]).push([[188],{188:(a,n,h)=>{h.r(n),h.d(n,{page:()=>e});var e="\n    <h2>PRODUCT PAGE</h2>\n    "}}]);
